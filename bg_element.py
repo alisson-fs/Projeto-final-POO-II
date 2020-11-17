@@ -1,8 +1,9 @@
 from objeto import Objeto
 
+
 class BGElement(Objeto):
 
-    # (115, 53), (223, 53) 
+    # (115, 53), (223, 53)
     # (115, 239), (223, 239)
     # + offset do tamanho
 
@@ -10,13 +11,14 @@ class BGElement(Objeto):
                  posicao: list,
                  nome: str,
                  tela: object,
-                 anim: object):
-        super().__init__(posicao, nome, tela, anim)
+                 anim: object,
+                 velocidade: int):
+        super().__init__(posicao, nome, tela, anim, velocidade)
 
         self.img_atual = self.anim[0]
         self.rect = self.img_atual.get_rect()
         self.pos_inicial()
-        
+
         self.__velocidade = 10
 
     def update(self):

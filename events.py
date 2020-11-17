@@ -14,7 +14,7 @@ class Events:
                 sys.exit()
 
             # Keyup events
-            if event.type == self.__pygame.KEYUP:
+            if event.type == self.__pygame.KEYDOWN:
                 if ((event.key == self.__pygame.K_a) or 
                 (event.key == self.__pygame.K_LEFT)):
                     self.__player.move_left()
@@ -22,7 +22,3 @@ class Events:
                 elif ((event.key == self.__pygame.K_d) or 
                 (event.key == self.__pygame.K_RIGHT)):
                     self.__player.move_right()
-                # elif event.key == self.__pygame.K_w:
-                #     self.__player.cima()
-                # elif event.key == self.__pygame.K_s:
-                #     self.__player.baixo()
