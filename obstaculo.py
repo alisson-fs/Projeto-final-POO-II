@@ -1,14 +1,14 @@
-from animado import Animado
-import pygame
+from objeto import Objeto
 
-class Obstaculo (Animado):
+
+class Obstaculo(Objeto):
     def __init__(self,
                  posicao: list,
                  nome: str,
                  tela: object,
-                 anim: list):
-        super().__init__(posicao, nome, tela)
-        self.anim = anim
+                 anim: list,
+                 velocidade: int):
+        super().__init__(posicao, nome, tela, anim, velocidade)
         self.img_atual = self.anim[0]
 
         self.rect = self.img_atual.get_rect()
@@ -20,7 +20,7 @@ class Obstaculo (Animado):
         self.spriteTimer = 0
         self.spriteTimerMax = 4
 
-
-class Obstaculos:        
-    def __init__(self):
-        self.__obstaculos = []
+    def update(self):
+        self.rect.y += self.velocidade
+        if (self.rect.top >= self.tela.height):
+            self.kill()

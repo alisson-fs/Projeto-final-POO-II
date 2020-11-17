@@ -8,12 +8,14 @@ class Objeto(pygame.sprite.Sprite, ABC):
                  posicao: list,
                  nome: str,
                  tela: Tela,
-                 anim: list):
+                 anim: list,
+                 velocidade: int):
         super().__init__()
         self.__posicao = posicao
         self.__nome = nome
         self.__tela = tela
         self.__anim = anim
+        self.__velocidade = velocidade
 
         #Vão ser implementados nas subclasses
         self.__img_atual = None
@@ -110,6 +112,14 @@ class Objeto(pygame.sprite.Sprite, ABC):
     @spriteTimerMax.setter
     def spriteTimerMax(self, spriteTimerMax):
         self.__spriteTimerMax = spriteTimerMax
+
+    @property
+    def velocidade(self):
+        return self.__velocidade
+
+    @velocidade.setter
+    def velocidade(self, velocidade):
+        self.__velocidade = velocidade
 
     def pos_inicial(self):
         if len(self.__posicao) >= 2:

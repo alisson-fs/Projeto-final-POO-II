@@ -7,8 +7,9 @@ class Jogador(Objeto):
                  posicao: list,
                  nome: str,
                  tela: object,
-                 anim: list):
-        super().__init__(posicao, nome, tela, anim)
+                 anim: list,
+                 velocidade: int):
+        super().__init__(posicao, nome, tela, anim, velocidade)
         self.img_atual = self.anim[0]
 
         self.rect = self.img_atual.get_rect()
@@ -20,22 +21,13 @@ class Jogador(Objeto):
         self.spriteTimer = 0
         self.spriteTimerMax = 4
 
-        self.__velX = 0
+        self.__velX = 0        
         self.__paradas = [35, 145, 260]
         
         self.__meio = True
 
         #self.__recorde = recorde
         self.__vida_atual = 3
-        self.__pontuacao = 0
-
-    @property
-    def pontuacao(self):
-        return self.__pontuacao
-
-    @pontuacao.setter
-    def pontuacao(self, pontuacao):
-        self.__pontuacao = pontuacao
 
     @property
     def vida_atual(self):
@@ -46,11 +38,11 @@ class Jogador(Objeto):
         self.__vida_atual = vida_atual
 
     def move_left(self):
-        self.__velX = -10
+        self.__velX = self.velocidade * -1
 
 
     def move_right(self):
-        self.__velX = 10 
+        self.__velX = self.velocidade 
 
     def blitme(self):
 
