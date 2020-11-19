@@ -9,6 +9,7 @@ from sound import Sound
 from obstaculo_controller import ObstaculoController
 from texto import Texto
 from pontuacao import Pontuacao
+from fundo import Fundo
 
 
 class Jogo:
@@ -23,7 +24,7 @@ class Jogo:
         
         # Atributos gerais
         self.__tela = Tela(pygame)
-        self.__velocidade = 10
+        self.__velocidade = 100
         self.__jogador = Jogador([145, 450],
                                  "Jogador",
                                  self.__tela,
@@ -37,7 +38,9 @@ class Jogo:
         
         #Interface gráfica
         self.__borda = pygame.image.load('Materials/borda.png').convert_alpha(self.__tela.tela)
-        self.__pontuacao = Pontuacao(0, self.__tela, self.__velocidade)
+        #self.__bordaVida = Fundo([330, 0, 70, 600], (0,0,0), self.__tela)
+        self.__bordaPontos = Fundo([334, 0, 66, 48], (0,0,0), self.__tela)
+        self.__pontuacao = Pontuacao(0, self.__tela, self.__velocidade, self.__bordaPontos)
         self.__pygame.display.set_caption("CoRUNavirus")
         
         # Obstáculos
@@ -63,6 +66,7 @@ class Jogo:
         # sons
         # self.__sc.playMusic(0)
         while True:
+
             # Updates
             self.__events.check_events()
             self.__fases[self.__fase_atual].update()
@@ -76,6 +80,8 @@ class Jogo:
             self.__fases[self.__fase_atual].blitme()
             self.__jogador.blitme()
             self.__oc.draw()
+            #self.__bordaVida.blitme()
+            self.__bordaPontos.blitme()
             self.__pontuacao.draw()
             
 

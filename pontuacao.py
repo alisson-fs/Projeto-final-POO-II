@@ -2,7 +2,7 @@ from texto import Texto
 
 
 class Pontuacao:
-    def __init__(self, pontos, tela, velocidade):
+    def __init__(self, pontos, tela, velocidade, fundo):
         self.__pontos = pontos
         self.__tela = tela
         self.__BLACK = (0, 0, 0)
@@ -15,6 +15,7 @@ class Pontuacao:
         self.__timerAtual = self.__timerMax
         self.__velocidade = velocidade
         self.__len_pontuacao = 1
+        self.__fundo = fundo
 
     def draw(self):
         self.__texto.texto = str(self.__pontos)
@@ -32,6 +33,9 @@ class Pontuacao:
         if self.__len_pontuacao < len(str(self.__pontos)):
             self.__texto.posicao[0] += -25
             self.__len_pontuacao += 1
+
+            if len(str(self.__pontos)) >=3:
+                self.__fundo.updateWidth(25)
 
 
         # if len(str(self.__pontos)) > 2:
