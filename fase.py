@@ -14,7 +14,7 @@ class Fase:
         self.__tela = tela
 
     def blitme(self):
-        self.__tela.tela.blit(self.__bg, (0, 0))
+        self.__tela.display.blit(self.__bg, (0, 0))
         for i in self.__elements:
             i.blitme()
 

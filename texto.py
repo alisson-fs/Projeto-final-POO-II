@@ -35,6 +35,6 @@ class Texto:
         self.__posicao = posicao
 
     def draw(self):
-        temp = self.__fonteCompleta.render(self.__texto, False, self.__cor).convert_alpha(self.__tela.tela)
-        self.__tela.tela.blit(temp, self.__posicao)
+        temp = self.__fonteCompleta.render(self.__texto, False, self.__cor).convert_alpha(self.__tela.display)
+        self.__tela.display.blit(temp, self.__posicao)
 

@@ -2,13 +2,12 @@ from texto import Texto
 
 
 class Pontuacao:
-    def __init__(self, pontos, tela, velocidade, fundo):
+    def __init__(self, pontos, tela, velocidade, cor,fundo):
         self.__pontos = pontos
         self.__tela = tela
-        self.__BLACK = (0, 0, 0)
+        self.__cor = cor
         self.__WHITE = (255, 255, 255)
-        self.__texto = Texto("", "Materials/Early GameBoy.ttf",
-                             25, self.__WHITE, self.__tela, [375, 10])
+        self.__texto = Texto("", "Materials/Early GameBoy.ttf", 25, self.__cor, self.__tela, [370, 10])
 
         self.__timer = 0
         self.__timerMax = 30
@@ -34,7 +33,7 @@ class Pontuacao:
             self.__texto.posicao[0] += -25
             self.__len_pontuacao += 1
 
-            if len(str(self.__pontos)) >=3:
+            if len(str(self.__pontos)) >=2:
                 self.__fundo.updateWidth(25)
 
 

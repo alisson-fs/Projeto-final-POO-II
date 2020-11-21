@@ -27,7 +27,7 @@ class ObstaculoController:
                 self.__pistas[pista].add(Obstaculo(self.__posicoes[pista],
                                                    "",
                                                    self.__tela,
-                                                   [pygame.image.load('Materials/virus.png').convert_alpha(self.__tela.tela)],
+                                                   [pygame.image.load('Materials/virus.png').convert_alpha(self.__tela.display)],
                                                    self.__velocidade))
 
     def timer(self):
