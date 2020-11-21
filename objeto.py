@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import pygame
 from tela import Tela
 
@@ -141,7 +141,8 @@ class Objeto(pygame.sprite.Sprite, ABC):
         self.img_atual = self.__anim[self.__spriteNum]
 
     def blitme(self):
-        self.tela.tela.blit(self.__img_atual, self.__rect)
+        self.tela.display.blit(self.__img_atual, self.__rect)
 
+    @abstractmethod
     def update(self):
         pass

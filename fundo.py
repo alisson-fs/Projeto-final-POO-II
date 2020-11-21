@@ -19,10 +19,22 @@ class Fundo:
     def param(self, param):
         self.__param = param
 
+    @property
+    def rect(self):
+        return self.__rect
+
+    @property
+    def cor(self):
+        return self.__cor
+
+    @cor.setter
+    def cor(self, cor):
+        self.__cor = cor
+
     def updateWidth(self, qtd):
         if self.__rect.x < self.__tela.width:
             self.__rect.x -= qtd
             self.__rect.width += qtd
 
     def blitme(self):
-        pygame.draw.rect(self.__tela.tela, self.__cor, self.__rect)
+        pygame.draw.rect(self.__tela.display, self.__cor, self.__rect, 0, 10)
