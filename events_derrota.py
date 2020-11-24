@@ -3,7 +3,7 @@ import pygame
 from events import Events
 import sys
 
-class EventsInicial(Events):
+class EventsDerrota(Events):
     def __init__(self):
         self.__mouseClick = False
 
@@ -23,7 +23,3 @@ class EventsInicial(Events):
                 self.__mouseClick = True
             else:
                 self.__mouseClick = False
-
-
-
-        

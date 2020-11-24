@@ -6,9 +6,8 @@ class Obstaculo(Objeto):
                  posicao: list,
                  nome: str,
                  tela: object,
-                 anim: list,
-                 velocidade: int):
-        super().__init__(posicao, nome, tela, anim, velocidade)
+                 anim: list):
+        super().__init__(posicao, nome, tela, anim)
         self.img_atual = self.anim[0]
 
         self.rect = self.img_atual.get_rect()
@@ -21,6 +20,6 @@ class Obstaculo(Objeto):
         self.spriteTimerMax = 4
 
     def update(self):
-        self.rect.y += self.velocidade
+        self.rect.y += self.velocidade_controller.vel_atual
         if (self.rect.top >= self.tela.height):
             self.kill()
