@@ -18,10 +18,11 @@ class Fundo:
     @param.setter
     def param(self, param):
         self.__param = param
+        self.__rect = pygame.Rect(*self.__param)
 
     @property
     def rect(self):
-        return self.__rect
+        return self.__rect     
 
     @property
     def cor(self):
@@ -31,7 +32,7 @@ class Fundo:
     def cor(self, cor):
         self.__cor = cor
 
-    def updateWidth(self, qtd):
+    def update_width(self, qtd):
         if self.__rect.x < self.__tela.width:
             self.__rect.x -= qtd
             self.__rect.width += qtd

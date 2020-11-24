@@ -11,17 +11,14 @@ class BGElement(Objeto):
                  posicao: list,
                  nome: str,
                  tela: object,
-                 anim: object,
-                 velocidade: int):
-        super().__init__(posicao, nome, tela, anim, velocidade)
+                 anim: object):
+        super().__init__(posicao, nome, tela, anim)
 
         self.img_atual = self.anim[0]
         self.rect = self.img_atual.get_rect()
         self.pos_inicial()
 
-        self.__velocidade = 10
-
     def update(self):
-        self.rect.y += self.__velocidade
+        self.rect.y += self.velocidade_controller.vel_atual
         if (self.rect.top >= self.tela.height):
             self.rect.bottom = 0
