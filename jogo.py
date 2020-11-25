@@ -16,8 +16,6 @@ from estado_inicial import EstadoInicial
 from estado_jogando import EstadoJogando
 from estado_pausa import EstadoPausa
 from estado_derrota import EstadoDerrota
-from pygame_widgets import Button
-from singleton import Singleton
 from velocidade_controller import VelocidadeController
 
 
@@ -85,7 +83,7 @@ class Jogo:
         self.__estado_derrota = EstadoDerrota(self.__pontuacao)
         
     def game_loop(self):
-        estado = 3
+        estado = 2
         musica = False
         while True:
             if estado == 0:
