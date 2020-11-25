@@ -129,7 +129,7 @@ class Jogo:
         self.game_loop()
 
     def jogando(self):
-        # self.__sc.playMusic(0)
+        #self.__sc.playMusic(0)
 
         # Updates
         self.__events_jogando.check_events()
