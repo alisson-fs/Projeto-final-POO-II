@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import pygame
 from tela import Tela
+from velocidade_controller import VelocidadeController
 
 
 class Objeto(pygame.sprite.Sprite, ABC):
@@ -8,14 +9,13 @@ class Objeto(pygame.sprite.Sprite, ABC):
                  posicao: list,
                  nome: str,
                  tela: Tela,
-                 anim: list,
-                 velocidade: int):
+                 anim: list):
         super().__init__()
         self.__posicao = posicao
         self.__nome = nome
         self.__tela = tela
         self.__anim = anim
-        self.__velocidade = velocidade
+        self.__velocidade_controller = VelocidadeController()
 
         #Vão ser implementados nas subclasses
         self.__img_atual = None
@@ -114,12 +114,8 @@ class Objeto(pygame.sprite.Sprite, ABC):
         self.__spriteTimerMax = spriteTimerMax
 
     @property
-    def velocidade(self):
-        return self.__velocidade
-
-    @velocidade.setter
-    def velocidade(self, velocidade):
-        self.__velocidade = velocidade
+    def velocidade_controller(self):
+        return self.__velocidade_controller
 
     def pos_inicial(self):
         if len(self.__posicao) >= 2:

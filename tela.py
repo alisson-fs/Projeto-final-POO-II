@@ -1,8 +1,9 @@
 import pygame
+from singleton import Singleton
 
-class Tela:
-    def __init__(self, medidas: tuple):
-        self.__medidas = medidas
+class Tela(metaclass=Singleton):
+    def __init__(self):
+        self.__medidas = (400,600)
         self.__display = pygame.display.set_mode(self.__medidas)
 
     @property
