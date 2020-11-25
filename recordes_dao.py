@@ -3,7 +3,7 @@ import pickle
 
 class RecordeDAO:
     def __init__(self,
-                 datasource='recordes.pkl'):
+                 datasource="recordes.pkl"):
         self.__datasource = datasource
         self.__object_cache = []
         try:
@@ -30,11 +30,22 @@ class RecordeDAO:
             if recorde["nome"] == nome and recorde["pontos"] == pontos:
                 self.__object_cache.remove(recorde)
         self.__dump()
-
-    def get(self, nome, pontos):
+        
+    def replace(self, nome, pontos):
+        replace = False
         for recorde in self.__object_cache:
-            if recorde["nome"] == nome and recorde["pontos"] == pontos:
-                return recorde
+            if recorde["nome"] == nome and recorde["pontos"] < pontos:
+                recorde["pontos"] = pontos
+                replace = True
+        self.__dump()
+        return replace
+
+    def get(self, nome):
+        recorde = None
+        for jogador in self.__object_cache:
+            if jogador["nome"] == nome:
+                recorde = jogador
+        return recorde
 
     def get_all(self):
         return self.__object_cache

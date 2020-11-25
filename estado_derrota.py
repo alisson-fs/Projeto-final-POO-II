@@ -3,48 +3,71 @@ from events_derrota import EventsDerrota
 from texto import Texto
 from fundo import Fundo
 from botao import Botao
+from botao_imagem import BotaoImagem
+from recordes_controller import RecordesController
+import pygame
 from pygame_widgets import TextBox
 
 class EstadoDerrota(Estado):
     def __init__(self, pontuacao):
         super().__init__()
         self.__pontuacao = pontuacao
+        self.__recordes_controller = RecordesController()
+        self.__recorde_salvo = False
 
-        self.__insereTexto = TextBox(self.tela.display, 20, 250, 360, 70, fontSize=35,
-                  borderColour=(0, 0, 0), textColour=(0, 0, 0), radius=10, borderThickness=5,
-                  onSubmit=self.teste, placeholderText="Insira seu nome.")
-
-        self.__texto_recorde = Texto("Insira seu nome e aperte Enter.", 
-                                    "Materials/Early GameBoy.ttf", 12, self.BLACK, 
-                                    self.tela, [32, 320])
-
-        self.__events_derrota = EventsDerrota(self.__insereTexto)
-        
         self.__texto_derrota = Texto("Derrota", "Materials/Early GameBoy.ttf", 50, self.BLACK, self.tela, [30, 40])
         
-        self.__fundo_pontuacao = Fundo([20, 130, 360, 70], self.DARK_GREY, self.tela)
-        self.__texto_pontuacao = Texto(f"Pontos: {self.__pontuacao.pontos}", "Materials/Early GameBoy.ttf", 20, self.WHITE, self.tela, [30, 150])
+        self.__fundo_pontuacao = Fundo([20, 140, 360, 70], self.DARK_GREY, self.tela)
+        self.__texto_pontuacao = Texto(f"Pontos: {self.__pontuacao.pontos}", "Materials/Early GameBoy.ttf", 20, self.WHITE, self.tela, [30, 160])
+
+        self.__nome = TextBox(self.tela.display, 20, 250, 280, 70, borderColour=(0, 0, 0),
+                                    textColour=(0, 0, 0), radius=10, borderThickness=5)
+        self.__nome.font = pygame.font.Font("Materials/Retro Gaming.ttf", 30)
+        self.__texto_recorde = Texto("Insira seu nome e aperte Enter.", 
+                                    "Materials/Retro Gaming.ttf", 12, self.BLACK, 
+                                    self.tela, [25, 325])
+
+        self.__events_derrota = EventsDerrota(self.__nome)
         
+        self.__imagem_botao = pygame.image.load("Materials/disquete.png").convert_alpha(self.tela.display)
+        self.__fundo_salvar = Fundo([310, 250, 70, 70], self.WHITE, self.tela)
+        self.__botao_salvar = BotaoImagem(self.__imagem_botao, (315, 255), self.__fundo_salvar, self.GREEN, self.DARK_GREEN, self.__events_derrota)
         
-        self.__texto_jogar_novamente = Texto("Jogar novamente", "Materials/Early GameBoy.ttf", 22, self.WHITE, self.tela, [42, 430])
-        self.__fundo_jogar_novamente = Fundo([20, 410, 360, 70], self.WHITE, self.tela)
+        self.__texto_jogar_novamente = Texto("Jogar novamente", "Materials/Retro Gaming.ttf", 30, self.WHITE, self.tela, [40, 395])
+        self.__fundo_jogar_novamente = Fundo([20, 380, 360, 70], self.WHITE, self.tela)
         self.__botao_jogar_novamente = Botao(self.__texto_jogar_novamente, self.__fundo_jogar_novamente, self.GREEN, self.DARK_GREEN, self.__events_derrota)
         
-        self.__texto_menu_derrota = Texto("Menu", "Materials/Early GameBoy.ttf", 40, self.WHITE, self.tela, [125, 510])
-        self.__fundo_menu_derrota = Fundo([20, 500, 360, 70], self.WHITE, self.tela)
-        self.__botao_menu_derrota = Botao(self.__texto_menu_derrota, self.__fundo_menu_derrota, self.GREEN, self.DARK_GREEN, self.__events_derrota)  
+        self.__texto_menu = Texto("Menu", "Materials/Retro Gaming.ttf", 40, self.WHITE, self.tela, [135, 490])
+        self.__fundo_menu = Fundo([20, 480, 360, 70], self.WHITE, self.tela)
+        self.__botao_menu = Botao(self.__texto_menu, self.__fundo_menu, self.GREEN, self.DARK_GREEN, self.__events_derrota)  
 
-    def teste(self):
-            print(self.__insereTexto.getText())
-            self.__texto_recorde.texto = "Recorde salvo com sucesso!"
+    def salvar_recorde(self):
+        if self.__nome.getText() != "":
+            if not self.__recorde_salvo:
+                msg, salvo = self.__recordes_controller.inclui_recorde(self.__nome.getText(), self.__pontuacao.pontos)
+                self.__texto_recorde.texto = msg
+                self.__recorde_salvo = salvo
+                print(self.__recordes_controller.recordes)
+            else:
+                self.__texto_recorde.texto = "Só é possível salvar o recorde uma vez."
+        else:
+            self.__recordes_controller.limpar_recordes()
+            print(self.__recordes_controller.recordes)
+            self.__texto_recorde.texto = "Digite um nome."
+
+        self.__nome = TextBox(self.tela.display, 20, 250, 280, 70, borderColour=(0, 0, 0),
+                                    textColour=(0, 0, 0), radius=10, borderThickness=5)
 
     def start(self):
         #Updates
         self.__events_derrota.check_events()
         jogar_novamente = self.__botao_jogar_novamente.update()
-        menu_derrota = self.__botao_menu_derrota.update()
+        menu_derrota = self.__botao_menu.update()
 
-        
+        salvar = self.__botao_salvar.update()
+        if salvar:
+            self.salvar_recorde()
+
         #Draws
         self.tela.fill(self.GREY)
         self.__texto_derrota.draw()
@@ -53,15 +76,18 @@ class EstadoDerrota(Estado):
         self.__texto_pontuacao.texto = str(f"Pontos: {self.__pontuacao.pontos}")
         self.__texto_pontuacao.draw()
 
-        self.__insereTexto.draw()
+        self.__nome.draw()
+        self.__botao_salvar.draw()
         self.__texto_recorde.draw()
 
         self.__botao_jogar_novamente.draw()
-        self.__botao_menu_derrota.draw()
+        self.__botao_menu.draw()
 
         if jogar_novamente:
+            self.__recorde_salvo = False
             return 1
         elif menu_derrota:
+            self.__recorde_salvo = False
             return 0
         else:
             return 3

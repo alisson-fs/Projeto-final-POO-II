@@ -70,4 +70,3 @@ class Jogador(Objeto):
             
         self.rect.x += self.__velX
         self.rect.x = max(min(self.rect.x, self.__paradas[2]), self.__paradas[0])
-            

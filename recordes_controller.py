@@ -1,4 +1,4 @@
-from recorde_dao import RecordeDAO
+from recordes_dao import RecordeDAO
 
 
 class RecordesController:
@@ -6,13 +6,22 @@ class RecordesController:
         self.__recorde_dao = RecordeDAO()
 
     def inclui_recorde(self, nome, pontos):
-        self.__recorde_dao.add(nome, pontos)
+        msg = "Recorde salvo com sucesso!"
+        salvo = False
+        if self.__recorde_dao.get(nome) == None:
+            self.__recorde_dao.add(nome, pontos)
+            salvo = True
+        else:
+            salvo = self.__recorde_dao.replace(nome, pontos)
+        if not salvo:
+            msg = "Recorde mais baixo que o existente."
+        return msg, salvo
 
-    def exclui_recorde(self, nome, pontos):
-        self.__recorde_dao.remove(nome, pontos)
+    def limpar_recordes(self):
+        self.__recorde_dao.remove_all()
 
-    def buscar_recorde(self, nome, pontos):
-        self.__recorde_dao.get(nome, pontos)
+    def buscar_recorde(self, nome):
+        self.__recorde_dao.get(nome)
 
     @property
     def recordes(self):

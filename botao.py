@@ -33,3 +33,23 @@ class Botao:
     def draw(self):
         self.__fundo.blitme()
         self.__texto.draw()
+
+    @property
+    def texto(self):
+        return self.__texto
+
+    @property
+    def fundo(self):
+        return self.__fundo
+
+    @property
+    def cor_normal(self):
+        return self.__cor_normal
+
+    @property
+    def cor_mouse(self):
+        return self.__cor_mouse
+
+    @property
+    def eventos(self):
+        return self.__eventos

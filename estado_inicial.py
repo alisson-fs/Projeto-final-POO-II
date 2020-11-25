@@ -10,11 +10,11 @@ class EstadoInicial(Estado):
         super().__init__()
         self.__events_inicial = EventsInicial()
         
-        self.__nome_jogo1 = Texto("co", "Materials/Early GameBoy.ttf", 25, self.WHITE, self.tela, [50, 100])
-        self.__nome_jogo2 = Texto("RUN", "Materials/Early GameBoy.ttf", 40, self.WHITE, self.tela, [100, 85])
-        self.__nome_jogo3 = Texto("avirus", "Materials/Early GameBoy.ttf", 25, self.WHITE, self.tela, [215, 100])
+        self.__nome_jogo1 = Texto("CO", "Materials/Mario-Kart-DS.ttf", 45, self.WHITE, self.tela, [12, 100])
+        self.__nome_jogo2 = Texto("RUN", "Materials/Mario-Kart-DS.ttf", 60, self.WHITE, self.tela, [77, 87])
+        self.__nome_jogo3 = Texto("AVIRUS", "Materials/Mario-Kart-DS.ttf", 45, self.WHITE, self.tela, [207, 100])
         
-        self.__texto_play = Texto("PLAY!", "Materials/Early GameBoy.ttf", 75, self.WHITE, self.tela,[30, 400])
+        self.__texto_play = Texto("PLAY", "Materials/Retro Gaming.ttf", 60, self.WHITE, self.tela,[115, 407])
         self.__fundo_play = Fundo([25, 410, 360, 70], self.WHITE, self.tela)
         self.__botao_play = Botao(self.__texto_play, self.__fundo_play, self.GREEN, self.DARK_GREEN, self.__events_inicial)
 
