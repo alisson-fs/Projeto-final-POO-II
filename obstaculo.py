@@ -2,11 +2,7 @@ from objeto import Objeto
 
 
 class Obstaculo(Objeto):
-    def __init__(self,
-                 posicao: list,
-                 nome: str,
-                 tela: object,
-                 anim: list):
+    def __init__(self):
         super().__init__(posicao, nome, tela, anim)
         self.img_atual = self.anim[0]
 

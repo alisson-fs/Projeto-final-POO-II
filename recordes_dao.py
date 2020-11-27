@@ -12,17 +12,26 @@ class RecordeDAO:
             self.__dump()
 
     def __dump(self):
-        data = open(self.__datasource, 'wb')
+        data = open(self.__datasource, "wb")
         pickle.dump(self.__object_cache, data)
         data.close()
 
     def __load(self):
-        data = open(self.__datasource, 'rb')
+        data = open(self.__datasource, "rb")
         self.__object_cache = pickle.load(data)
         data.close()
 
     def add(self, nome, pontos):
-        self.__object_cache.append({"nome": nome, "pontos": pontos})
+        if len(self.__object_cache) == 0:
+            self.__object_cache.append({"nome": nome, "pontos": pontos})
+        else:
+            ultimo = False
+            for i in range(len(self.__object_cache)):
+                if pontos > self.__object_cache[i]["pontos"]:
+                    self.__object_cache.insert(i, {"nome": nome, "pontos": pontos})
+                    ultimo = True
+            if not ultimo:
+                self.__object_cache.append({"nome": nome, "pontos": pontos})
         self.__dump()
 
     def remove(self, nome, pontos):

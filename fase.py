@@ -6,12 +6,11 @@ class Fase:
 
     def __init__(self,
                  bg: object,
-                 elements: list,
-                 tela: Tela):
+                 elements: list):
 
         self.__bg = bg
         self.__elements = elements
-        self.__tela = tela
+        self.__tela = Tela()
 
     def blitme(self):
         self.__tela.display.blit(self.__bg, (0, 0))

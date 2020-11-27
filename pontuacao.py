@@ -1,20 +1,23 @@
 from texto import Texto
+from tela import Tela
+from fundo import Fundo
 from velocidade_controller import VelocidadeController
+from singleton import Singleton
 
-class Pontuacao:
-    def __init__(self, pontos, tela, cor, fundo):
-        self.__pontos = pontos
-        self.__tela = tela
-        self.__cor = cor
+class Pontuacao(metaclass=Singleton):
+    def __init__(self):
+        self.__pontos = 0
+        self.__tela = Tela()
         self.__WHITE = (255, 255, 255)
-        self.__texto = Texto("", "Materials/Early GameBoy.ttf", 25, self.__cor, self.__tela, [370, 10])
+        self.__GREEN = (0, 100, 0)
+        self.__texto = Texto("", "Materials/Early GameBoy.ttf", 25, self.__WHITE, [370, 10])
 
         self.__timer = 0
         self.__timerMax = 30
         self.__timerAtual = self.__timerMax
         self.__velocidade_controller = VelocidadeController()
         self.__len_pontuacao = 1
-        self.__fundo = fundo
+        self.__fundo = Fundo([360, 10, 35, 30], self.__GREEN)
 
     @property
     def pontos(self):
@@ -31,6 +34,10 @@ class Pontuacao:
     @velocidade.setter
     def velocidade(self, velocidade):
         self.__velocidade = velocidade
+
+    @property
+    def fundo(self):
+        return self.__fundo
 
     def draw(self):
         self.__texto.texto = str(self.__pontos)

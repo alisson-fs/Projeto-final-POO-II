@@ -10,9 +10,8 @@ class BGElement(Objeto):
     def __init__(self,
                  posicao: list,
                  nome: str,
-                 tela: object,
                  anim: object):
-        super().__init__(posicao, nome, tela, anim)
+        super().__init__(posicao, nome, anim)
 
         self.img_atual = self.anim[0]
         self.rect = self.img_atual.get_rect()

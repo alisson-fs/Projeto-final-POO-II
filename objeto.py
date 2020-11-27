@@ -8,12 +8,11 @@ class Objeto(pygame.sprite.Sprite, ABC):
     def __init__(self,
                  posicao: list,
                  nome: str,
-                 tela: Tela,
                  anim: list):
         super().__init__()
         self.__posicao = posicao
         self.__nome = nome
-        self.__tela = tela
+        self.__tela = Tela()
         self.__anim = anim
         self.__velocidade_controller = VelocidadeController()
 

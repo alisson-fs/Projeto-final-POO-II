@@ -1,14 +1,12 @@
 from objeto import Objeto
 import pygame
+from singleton import Singleton
+from tela import Tela
 
 
 class Jogador(Objeto):
-    def __init__(self,
-                 posicao: list,
-                 nome: str,
-                 tela: object,
-                 anim: list):
-        super().__init__(posicao, nome, tela, anim)
+    def __init__(self, anim):
+        super().__init__([145, 450], "Jogador", anim)
         self.img_atual = self.anim[0]
 
         self.rect = self.img_atual.get_rect()
