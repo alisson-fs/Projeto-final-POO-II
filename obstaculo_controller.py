@@ -2,11 +2,12 @@ from obstaculo import Obstaculo
 import pygame
 import random
 from velocidade_controller import VelocidadeController
+from tela import Tela
 
 
 class ObstaculoController:
-    def __init__(self, tela, player):
-        self.__tela = tela
+    def __init__(self, player):
+        self.__tela = Tela()
         self.__player = player
 
         self.__obstaculos_tela = 0
@@ -31,8 +32,6 @@ class ObstaculoController:
                                                    "",
                                                    self.__tela,
                                                    [pygame.image.load(image).convert_alpha(self.__tela.display)]))
-                
-                                        
 
     def timer(self):
         self.__timer += 1

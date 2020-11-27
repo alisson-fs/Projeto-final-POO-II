@@ -1,23 +1,23 @@
 import pygame
+from singleton import Singleton
 
-class Sound:
+class SomController(metaclass=Singleton):
     def __init__(self):
         #Inicializa sons
         # sound1 = pygame.mixer.music.load("Nivel1.mp3")
         
-
         #Lista com os sons
-        self.sounds = []
+        self.__sounds = []
 
         #Volume dos sons
         for sound in self.sounds:
             sound.set_volume(0.25)
 
         #Inicializa as musicas de fundo
-        background_music = "Materials/background_sound.mp3"
+        self.__background_music = "Materials/background_sound.mp3"
 
         #Lista com as musicas de fundo
-        self.musics = [background_music]
+        self.__musics = [self.__background_music]
 
     #Toca um som da lista pelo index
     def playSound(self,index):
@@ -31,3 +31,15 @@ class Sound:
     #Para a musica atual
     def stopMusic(self):
         pygame.mixer.music.stop()
+
+    @property 
+    def sounds(self):
+        return self.__sounds
+    
+    @property
+    def background_music(self):
+        return self.__background_music
+    
+    @property
+    def musics(self):
+        return self.__musics

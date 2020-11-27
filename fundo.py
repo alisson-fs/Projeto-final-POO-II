@@ -1,13 +1,14 @@
 import pygame
+from tela import Tela
 
 class Fundo:
 
-    def __init__(self, param, cor, tela):
+    def __init__(self, param, cor):
         
         #Parametros = (left, top, width, height)
         self.__param = param
         self.__cor = cor
-        self.__tela = tela
+        self.__tela = Tela()
 
         self.__rect = pygame.Rect(*self.__param)
 
@@ -31,6 +32,10 @@ class Fundo:
     @cor.setter
     def cor(self, cor):
         self.__cor = cor
+
+    @property
+    def tela(self):
+        return self.__tela
 
     def update_width(self, qtd):
         if self.__rect.x < self.__tela.width:

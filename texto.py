@@ -1,4 +1,5 @@
 import pygame
+from tela import Tela
 
 class Texto:
     def __init__(self,
@@ -6,14 +7,13 @@ class Texto:
                  font,
                  tamanho,
                  cor,
-                 tela,
                  posicao):
     
         self.__texto = texto
         self.__font = font
         self.__tamanho = tamanho
         self.__cor = cor
-        self.__tela = tela
+        self.__tela = Tela()
         self.__posicao = posicao
 
         self.__fonteCompleta = pygame.font.Font(self.__font, self.__tamanho)

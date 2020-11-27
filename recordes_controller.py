@@ -1,7 +1,8 @@
 from recordes_dao import RecordeDAO
+from singleton import Singleton
 
 
-class RecordesController:
+class RecordesController(metaclass=Singleton):
     def __init__(self):
         self.__recorde_dao = RecordeDAO()
 

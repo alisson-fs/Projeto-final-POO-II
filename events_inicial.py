@@ -23,7 +23,4 @@ class EventsInicial(Events):
                 self.__mouseClick = True
             else:
                 self.__mouseClick = False
-
-
-
-        
+                

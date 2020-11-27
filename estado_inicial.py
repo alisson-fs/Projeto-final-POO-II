@@ -10,12 +10,12 @@ class EstadoInicial(Estado):
         super().__init__()
         self.__events_inicial = EventsInicial()
         
-        self.__nome_jogo1 = Texto("CO", "Materials/Mario-Kart-DS.ttf", 45, self.WHITE, self.tela, [12, 100])
-        self.__nome_jogo2 = Texto("RUN", "Materials/Mario-Kart-DS.ttf", 60, self.WHITE, self.tela, [77, 87])
-        self.__nome_jogo3 = Texto("AVIRUS", "Materials/Mario-Kart-DS.ttf", 45, self.WHITE, self.tela, [207, 100])
+        self.__nome_jogo1 = Texto("co", "Materials/Mario-Kart-DS.ttf", 45, self.WHITE, [12, 100])
+        self.__nome_jogo2 = Texto("RUN", "Materials/Mario-Kart-DS.ttf", 60, self.WHITE, [77, 87])
+        self.__nome_jogo3 = Texto("avirus", "Materials/Mario-Kart-DS.ttf", 45, self.WHITE, [207, 100])
         
-        self.__texto_play = Texto("PLAY", "Materials/Retro Gaming.ttf", 60, self.WHITE, self.tela,[115, 407])
-        self.__fundo_play = Fundo([25, 410, 360, 70], self.WHITE, self.tela)
+        self.__texto_play = Texto("PLAY", "Materials/Retro Gaming.ttf", 60, self.WHITE, [115, 407])
+        self.__fundo_play = Fundo([25, 410, 360, 70], self.WHITE)
         self.__botao_play = Botao(self.__texto_play, self.__fundo_play, self.GREEN, self.DARK_GREEN, self.__events_inicial)
 
     def start(self):
@@ -31,6 +31,6 @@ class EstadoInicial(Estado):
         self.__botao_play.draw()
 
         if play:
-            return 1
+            return "jogando"
         else:
-            return 0
+            return "inicial"
