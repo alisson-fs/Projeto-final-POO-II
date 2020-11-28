@@ -7,6 +7,7 @@ class EventsJogando(Events):
     def __init__(self,player):
         self.__player = player
         self.__pausa = False
+        self.__mouseClick = False
 
     @property
     def pausa(self):
@@ -16,8 +17,13 @@ class EventsJogando(Events):
     def pausa(self, pausa):
         self.__pausa = pausa
 
+    @property
+    def mouseClick(self):
+        return self.__mouseClick
+
     def check_events(self):
         self.__pausa = False
+        self.__mouseClick = False
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
@@ -38,3 +44,8 @@ class EventsJogando(Events):
                     self.__pausa = True
                 elif (event.key == pygame.K_p):
                     self.__pausa = False
+                
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                self.__mouseClick = True
+            else:
+                self.__mouseClick = False

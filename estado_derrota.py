@@ -26,9 +26,9 @@ class EstadoDerrota(Estado):
 
         self.__events_derrota = EventsDerrota(self.__nome)
         
-        self.__imagem_botao = pygame.image.load("Materials/disquete.png").convert_alpha(self.tela.display)
+        self.__imagem_botao_salvar = pygame.image.load("Materials/disquete.png").convert_alpha(self.tela.display)
         self.__fundo_salvar = Fundo([310, 250, 70, 70], self.WHITE)
-        self.__botao_salvar = BotaoImagem(self.__imagem_botao, (315, 255), self.__fundo_salvar, self.GREEN, self.DARK_GREEN, self.__events_derrota)
+        self.__botao_salvar = BotaoImagem(self.__imagem_botao_salvar, (315, 255), self.__fundo_salvar, self.GREEN, self.DARK_GREEN, self.__events_derrota)
         
         self.__texto_jogar_novamente = Texto("Jogar novamente", "Materials/Retro Gaming.ttf", 30, self.WHITE, [40, 395])
         self.__fundo_jogar_novamente = Fundo([20, 380, 360, 70], self.WHITE)
@@ -40,18 +40,15 @@ class EstadoDerrota(Estado):
 
     def salvar_recorde(self):
         if self.__nome.getText() != "":
-            if len(self.__nome.getText()) >= 10:
+            if len(self.__nome.getText()) > 10:
                 self.__texto_recorde.texto = "Digite um nome menor, limite 10 caracteres."
             elif not self.__recorde_salvo:
                 msg, salvo = self.__recordes_controller.inclui_recorde(self.__nome.getText(), self.pontuacao.pontos)
                 self.__texto_recorde.texto = msg
                 self.__recorde_salvo = salvo
-                print(self.__recordes_controller.recordes)
             else:
                 self.__texto_recorde.texto = "Só é possível salvar o recorde uma vez."
         else:
-            self.__recordes_controller.limpar_recordes()
-            print(self.__recordes_controller.recordes)
             self.__texto_recorde.texto = "Digite um nome."
 
         self.__nome.setText("")

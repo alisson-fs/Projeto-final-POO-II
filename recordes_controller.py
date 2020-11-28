@@ -21,8 +21,8 @@ class RecordesController(metaclass=Singleton):
     def limpar_recordes(self):
         self.__recorde_dao.remove_all()
 
-    def buscar_recorde(self, nome):
-        self.__recorde_dao.get(nome)
+    def primeiro(self):
+        return self.__recorde_dao.get_first()
 
     @property
     def recordes(self):

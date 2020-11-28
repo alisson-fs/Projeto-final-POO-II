@@ -6,6 +6,7 @@ from fundo import Fundo
 from pontuacao import Pontuacao
 from obstaculo_controller import ObstaculoController
 from fases_controller import FasesController
+from botao_imagem import BotaoImagem
 import pygame
 
 
@@ -16,6 +17,10 @@ class EstadoJogando(Estado):
         self.__events_jogando = EventsJogando(self.jogador)
         self.__borda = pygame.image.load("Materials/borda.png").convert_alpha(self.tela.display)
         self.__vida = pygame.image.load("Materials/coracao.png").convert_alpha(self.tela.display)
+        
+        self.__imagem_pausa = pygame.image.load("Materials/pausa.png").convert_alpha(self.tela.display)
+        self.__fundo_pausa = Fundo([10, 10, 50, 50], self.WHITE)
+        self.__botao_pausa = BotaoImagem(self.__imagem_pausa, [15, 15], self.__fundo_pausa, self.GREEN, self.DARK_GREEN, self.__events_jogando)
 
     def start(self):
         if not self.__musica:
@@ -30,7 +35,8 @@ class EstadoJogando(Estado):
         self.obstaculo_controller.update()
         self.obstaculo_controller.timer()
         self.velocidade_controller.update()
-        print(self.velocidade_controller.vel_atual)
+
+        pausa_botao = self.__botao_pausa.update()
 
         # Draws
         self.fases_controller.fase_atual.blitme()
@@ -38,6 +44,7 @@ class EstadoJogando(Estado):
         self.obstaculo_controller.draw()
         self.pontuacao.fundo.blitme()
         self.pontuacao.draw()
+        self.__botao_pausa.draw()
 
         # Draw no numero de vidas
         for i in range(self.jogador.vida_atual):
@@ -46,7 +53,7 @@ class EstadoJogando(Estado):
         # Desenha borda na tela
         self.tela.display.blit(self.__borda, (0, 0))
 
-        if self.__events_jogando.pausa:
+        if self.__events_jogando.pausa or pausa_botao:
             return "pausa"
         else:
             return "jogando"

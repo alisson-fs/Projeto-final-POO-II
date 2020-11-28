@@ -1,11 +1,13 @@
 import pygame
-#from pygame.locals import *
 from tela import Tela
 from estado_inicial import EstadoInicial
 from estado_jogando import EstadoJogando
 from estado_pausa import EstadoPausa
 from estado_derrota import EstadoDerrota
 from estado_recorde import EstadoRecorde
+from estado_regras import EstadoRegras
+from estado_som import EstadoSom
+from estado_developers import EstadoDevelopers
 
 
 class Jogo:
@@ -23,10 +25,13 @@ class Jogo:
                           "jogando": EstadoJogando(),
                           "pausa": EstadoPausa(),
                           "derrota": EstadoDerrota(),
-                          "recorde": EstadoRecorde()}
+                          "recorde": EstadoRecorde(),
+                          "regras": EstadoRegras(),
+                          "som": EstadoSom(),
+                          "developers": EstadoDevelopers()}
 
     def start(self):
-        estado = "recorde"
+        estado = "inicial"
         while True:
             proximo_estado = self.__estados[estado].start()
             estado = proximo_estado
