@@ -25,12 +25,13 @@ class RecordeDAO:
         if len(self.__object_cache) == 0:
             self.__object_cache.append({"nome": nome, "pontos": pontos})
         else:
-            ultimo = False
+            ultimo = True
             for i in range(len(self.__object_cache)):
                 if pontos > self.__object_cache[i]["pontos"]:
                     self.__object_cache.insert(i, {"nome": nome, "pontos": pontos})
-                    ultimo = True
-            if not ultimo:
+                    ultimo = False
+                    break
+            if ultimo:
                 self.__object_cache.append({"nome": nome, "pontos": pontos})
         self.__dump()
 
@@ -44,7 +45,8 @@ class RecordeDAO:
         replace = False
         for recorde in self.__object_cache:
             if recorde["nome"] == nome and recorde["pontos"] < pontos:
-                recorde["pontos"] = pontos
+                self.__object_cache.remove(recorde)
+                self.add(nome, pontos)
                 replace = True
         self.__dump()
         return replace
@@ -58,6 +60,12 @@ class RecordeDAO:
 
     def get_all(self):
         return self.__object_cache
+
+    def get_first(self):
+        if len(self.__object_cache) > 0:
+            return self.__object_cache[0]
+        else:
+            return ""
 
     def remove_all(self):
         self.__object_cache = []

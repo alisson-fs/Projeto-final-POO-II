@@ -7,24 +7,18 @@ from velocidade_controller import VelocidadeController
 class Objeto(pygame.sprite.Sprite, ABC):
     def __init__(self,
                  posicao: list,
-                 nome: str,
                  anim: list):
         super().__init__()
         self.__posicao = posicao
-        self.__nome = nome
         self.__tela = Tela()
         self.__anim = anim
         self.__velocidade_controller = VelocidadeController()
-
         #Vão ser implementados nas subclasses
         self.__img_atual = None
-
         self.__spriteNum = 0
         self.__spriteNumMax = 0
-
         self.__spriteTimer = 0
         self.__spriteTimerMax = 0
-
         #Colocar isso no init das subclasses
         # self.pos_inicial()
 
@@ -67,7 +61,7 @@ class Objeto(pygame.sprite.Sprite, ABC):
     @property
     def rect(self):
         return self.__rect
-    
+
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
@@ -103,7 +97,7 @@ class Objeto(pygame.sprite.Sprite, ABC):
     @spriteTimer.setter
     def spriteTimer(self, spriteTimer):
         self.__spriteTimer = spriteTimer
-    
+
     @property
     def spriteTimerMax(self):
         return self.__spriteTimerMax

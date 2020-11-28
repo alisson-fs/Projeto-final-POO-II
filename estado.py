@@ -5,6 +5,7 @@ from som_controller import SomController
 from velocidade_controller import VelocidadeController
 from obstaculo_controller import ObstaculoController
 from fases_controller import FasesController
+from recordes_controller import RecordesController
 from jogador import Jogador
 import pygame
 
@@ -21,12 +22,16 @@ class Estado(ABC):
         self.__velocidade_controller = VelocidadeController()
         self.__obstaculo_controller = ObstaculoController(self.__jogador)
         self.__fases_controller = FasesController()
+        self.__recordes_controller = RecordesController()
         self.__GREEN = (0, 100, 0)
         self.__DARK_GREEN = (0, 80, 0)
         self.__WHITE = (255, 255, 255)
         self.__BLACK = (0, 0, 0)
         self.__GREY = (100, 100, 100)
         self.__DARK_GREY = (70, 70, 70)
+        self.__YELLOW = (220, 220, 0)
+        self.__SILVER = (160, 160, 160)
+        self.__BRONZE = (150, 100, 0)
 
     @property
     def tela(self):
@@ -57,6 +62,10 @@ class Estado(ABC):
         return self.__fases_controller
 
     @property
+    def recordes_controller(self):
+        return self.__recordes_controller
+
+    @property
     def BLACK(self):
         return self.__BLACK
 
@@ -79,6 +88,18 @@ class Estado(ABC):
     @property
     def DARK_GREY(self):
         return self.__DARK_GREY
+
+    @property
+    def YELLOW(self):
+        return self.__YELLOW
+
+    @property
+    def SILVER(self):
+        return self.__SILVER
+    
+    @property
+    def BRONZE(self):
+        return self.__BRONZE
 
     @abstractmethod
     def start(self):

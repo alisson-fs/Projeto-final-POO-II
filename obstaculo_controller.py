@@ -29,8 +29,6 @@ class ObstaculoController:
             if len(self.__pistas[pista]) == 0:
                 image = self.__obstaculos_tela[random.randint(0, len(self.__obstaculos_tela) - 1)]
                 self.__pistas[pista].add(Obstaculo(self.__posicoes[pista],
-                                                   "",
-                                                   self.__tela,
                                                    [pygame.image.load(image).convert_alpha(self.__tela.display)]))
 
     def timer(self):
