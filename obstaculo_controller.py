@@ -16,7 +16,7 @@ class ObstaculoController:
         self.__pista3 = pygame.sprite.Group()
         self.__pistas = [self.__pista1, self.__pista2, self.__pista3]
         self.__posicoes = [[35, -100], [145, -100], [260, -100]]
-        self.__obstaculos_tela = ['Materials/virus.png']
+        self.__obstaculos_tela = ['Materials/virus.png', 'Materials/EAD.png']
 
         self.__timer_max = 30
         self.__timer = 0
@@ -56,11 +56,12 @@ class ObstaculoController:
     def check_colisao(self):
         for i in range(3):
             bateu = pygame.sprite.spritecollideany(self.__player, self.__pistas[i])
-            if isinstance(bateu, pygame.sprite.Sprite):
+            if isinstance(bateu, Obstaculo):
                 bateu.kill()
+                self.__player.perde_vida()
 
     def zerar(self):
         for pista in self.__pistas:
-            pista.clear()
+            pista.empty()
         self.__timer_max = 30
         self.__timer = 0

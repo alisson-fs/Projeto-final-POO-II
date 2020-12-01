@@ -1,5 +1,5 @@
 from estado import Estado
-from eventos_som import EventsSom
+from events_som import EventsSom
 from texto import Texto
 from fundo import Fundo
 from botao_imagem import BotaoImagem

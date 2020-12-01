@@ -11,16 +11,13 @@ import pygame
 
 
 class Estado(ABC):
-    def __init__(self):
+    def __init__(self, jogador=None, obstaculo_controller=None):
+        self.__jogador = jogador
         self.__tela = Tela()
-        self.__jogador = Jogador([pygame.image.load("Materials/p1.png").convert_alpha(self.__tela.display),
-                                 pygame.image.load("Materials/p2.png").convert_alpha(self.__tela.display),
-                                 pygame.image.load("Materials/p1.png").convert_alpha(self.__tela.display),
-                                 pygame.image.load("Materials/p3.png").convert_alpha(self.__tela.display)])
         self.__pontuacao = Pontuacao()
         self.__som_controller = SomController()
         self.__velocidade_controller = VelocidadeController()
-        self.__obstaculo_controller = ObstaculoController(self.__jogador)
+        self.__obstaculo_controller = obstaculo_controller
         self.__fases_controller = FasesController()
         self.__recordes_controller = RecordesController()
         self.__GREEN = (0, 100, 0)
@@ -34,12 +31,12 @@ class Estado(ABC):
         self.__BRONZE = (150, 100, 0)
 
     @property
-    def tela(self):
-        return self.__tela
-
-    @property
     def jogador(self):
         return self.__jogador
+
+    @property
+    def tela(self):
+        return self.__tela
 
     @property
     def pontuacao(self):

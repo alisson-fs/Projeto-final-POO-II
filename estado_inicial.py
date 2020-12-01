@@ -8,8 +8,8 @@ import pygame
 
 
 class EstadoInicial(Estado):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, jogador):
+        super().__init__(jogador)
         self.__events_inicial = EventsInicial()
         
         self.__nome_jogo1 = Texto("co", "Materials/Mario-Kart-DS.ttf", 50, self.WHITE, [22, 100])

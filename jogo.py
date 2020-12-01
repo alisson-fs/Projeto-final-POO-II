@@ -1,5 +1,7 @@
 import pygame
 from tela import Tela
+from jogador import Jogador
+from obstaculo_controller import ObstaculoController
 from estado_inicial import EstadoInicial
 from estado_jogando import EstadoJogando
 from estado_pausa import EstadoPausa
@@ -21,10 +23,15 @@ class Jogo:
         self.__FramePerSec = pygame.time.Clock()
         self.__pygame.display.set_caption("coRUNavirus")
         self.__tela = Tela()
-        self.__estados = {"inicial": EstadoInicial(),
-                          "jogando": EstadoJogando(),
-                          "pausa": EstadoPausa(),
-                          "derrota": EstadoDerrota(),
+        self.__jogador = Jogador([pygame.image.load("Materials/p1.png").convert_alpha(self.__tela.display),
+                                 pygame.image.load("Materials/p2.png").convert_alpha(self.__tela.display),
+                                 pygame.image.load("Materials/p1.png").convert_alpha(self.__tela.display),
+                                 pygame.image.load("Materials/p3.png").convert_alpha(self.__tela.display)])
+        self.__obstaculo_controller = ObstaculoController(self.__jogador)
+        self.__estados = {"inicial": EstadoInicial(self.__jogador),
+                          "jogando": EstadoJogando(self.__jogador, self.__obstaculo_controller),
+                          "pausa": EstadoPausa(self.__jogador, self.__obstaculo_controller),
+                          "derrota": EstadoDerrota(self.__jogador, self.__obstaculo_controller),
                           "recorde": EstadoRecorde(),
                           "regras": EstadoRegras(),
                           "som": EstadoSom(),
