@@ -2,14 +2,14 @@ from estado import Estado
 from texto import Texto
 from fundo import Fundo
 from botao_imagem import BotaoImagem
-from events_developers import EventsDevelopers
+from events_padrao import EventsPadrao
 import pygame
 
 
 class EstadoDevelopers(Estado):
     def __init__(self):
         super().__init__()
-        self.__events_developers = EventsDevelopers()
+        self.__events_developers = EventsPadrao()
         self.__texto_developers = Texto("Developers", "Materials/Early GameBoy.ttf", 38, self.BLACK, [15, 40])
         
         self.__fundo_texto_developers = Fundo([20, 140, 360, 350], self.DARK_GREY)

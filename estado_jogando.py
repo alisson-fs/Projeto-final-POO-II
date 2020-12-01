@@ -3,7 +3,7 @@ from events_jogando import EventsJogando
 from tela import Tela
 from jogador import Jogador
 from fundo import Fundo
-from pontuacao import Pontuacao
+#from pontuacao_controller import PontuacaoController
 from obstaculo_controller import ObstaculoController
 from fases_controller import FasesController
 from botao_imagem import BotaoImagem
@@ -13,19 +13,17 @@ import pygame
 class EstadoJogando(Estado):
     def __init__(self, jogador, obstaculo_controller):
         super().__init__(jogador, obstaculo_controller)
-        self.__musica = False
         self.__events_jogando = EventsJogando(self.jogador)
         self.__borda = pygame.image.load("Materials/borda.png").convert_alpha(self.tela.display)
         self.__vida = pygame.image.load("Materials/coracao.png").convert_alpha(self.tela.display)
+        self.__mascara = pygame.image.load("Materials/mascara menor.png").convert_alpha(self.tela.display)
+        self.__alcool_gel = pygame.image.load("Materials/alcool gel menor.png").convert_alpha(self.tela.display)
         
         self.__imagem_pausa = pygame.image.load("Materials/pausa.png").convert_alpha(self.tela.display)
         self.__fundo_pausa = Fundo([10, 10, 50, 50], self.WHITE)
         self.__botao_pausa = BotaoImagem(self.__imagem_pausa, [15, 15], self.__fundo_pausa, self.GREEN, self.DARK_GREEN, self.__events_jogando)
 
     def start(self):
-        if not self.__musica:
-            #self.som_controller.playMusic(0)
-            self.__musica = True
         # Updates
         self.__events_jogando.check_events()
         self.fases_controller.update()
@@ -49,13 +47,23 @@ class EstadoJogando(Estado):
         # Draw no numero de vidas
         for i in range(self.jogador.vida_atual):
             self.tela.display.blit(self.__vida, (350, 100 + 40*i))
+        
+        # Draw nos efeitos
+        if self.jogador.invencivel:
+            self.tela.display.blit(self.__mascara, (350, 230))
+
+        if self.pontuacao.multiplicador_ativo:
+            self.tela.display.blit(self.__alcool_gel, (350, 280))
+
 
         # Desenha borda na tela
         self.tela.display.blit(self.__borda, (0, 0))
 
         if self.__events_jogando.pausa or pausa_botao:
+            self.som_controller.pauseMusic()
             return "pausa"
         elif morreu:
+            self.som_controller.stopMusic()
             return "derrota"
         else:
             return "jogando"

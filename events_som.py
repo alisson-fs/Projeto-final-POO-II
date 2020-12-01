@@ -13,14 +13,6 @@ class EventsSom(Events):
         return self.__mouseClick
 
     @property
-    def textbox(self):
-        return self.__textbox
-
-    @textbox.setter
-    def textbox(self, textbox):
-        self.__textbox = textbox
-
-    @property
     def events(self):
         return pygame.event.get()
 

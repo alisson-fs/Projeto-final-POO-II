@@ -1,9 +1,9 @@
 import sys
 import pygame
-from events import Events
+from events_padrao import EventsPadrao
 import sys
 
-class EventsDerrota(Events):
+class EventsDerrota(EventsPadrao):
     def __init__(self, textbox):
         self.__mouseClick = False
         self.__textbox = textbox

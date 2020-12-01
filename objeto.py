@@ -58,13 +58,13 @@ class Objeto(pygame.sprite.Sprite, ABC):
     def img_atual(self, img):
         self.__img_atual = img
 
-    @property
-    def rect(self):
-        return self.__rect
+    # @property
+    # def rect(self):
+    #     return self.__rect
 
-    @rect.setter
-    def rect(self, rect):
-        self.__rect = rect
+    # @rect.setter
+    # def rect(self, rect):
+    #     self.__rect = rect
 
     @property
     def anim(self):
@@ -112,11 +112,11 @@ class Objeto(pygame.sprite.Sprite, ABC):
 
     def pos_inicial(self):
         if len(self.__posicao) >= 2:
-            self.__rect.x = self.__posicao[0]
-            self.__rect.y = self.__posicao[1]
+            self.rect.x = self.__posicao[0]
+            self.rect.y = self.__posicao[1]
         else:
-            self.__rect.x = 0
-            self.__rect.y = 0
+            self.rect.x = 0
+            self.rect.y = 0
 
     def animacao(self):
         self.__spriteTimer +=1
@@ -130,7 +130,7 @@ class Objeto(pygame.sprite.Sprite, ABC):
         self.img_atual = self.__anim[self.__spriteNum]
 
     def blitme(self):
-        self.tela.display.blit(self.__img_atual, self.__rect)
+        self.tela.display.blit(self.__img_atual, self.rect)
 
     @abstractmethod
     def update(self):

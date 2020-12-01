@@ -4,14 +4,14 @@ from botao import Botao
 from texto import Texto
 from fundo import Fundo
 from botao_imagem import BotaoImagem
-from events_recorde import EventsRecorde
+from events_padrao import EventsPadrao
 import pygame
 
 
 class EstadoRecorde(Estado):
     def __init__(self):
         super().__init__()
-        self.__events_recorde = EventsRecorde()
+        self.__events_recorde = EventsPadrao()
         self.__texto_recordes = Texto("Recordes", "Materials/Early GameBoy.ttf", 50, self.BLACK, [5, 40])
         self.__fundo_texto_recorde = Fundo([20, 140, 360, 350], self.DARK_GREY)
         self.__imagem_botao_voltar = pygame.image.load("Materials/voltar.png").convert_alpha(self.tela.display)

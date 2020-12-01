@@ -1,5 +1,5 @@
 from estado import Estado
-from events_inicial import EventsInicial
+from events_padrao import EventsPadrao
 from texto import Texto
 from fundo import Fundo
 from botao import Botao
@@ -10,7 +10,7 @@ import pygame
 class EstadoInicial(Estado):
     def __init__(self, jogador):
         super().__init__(jogador)
-        self.__events_inicial = EventsInicial()
+        self.__events_inicial = EventsPadrao()
         
         self.__nome_jogo1 = Texto("co", "Materials/Mario-Kart-DS.ttf", 50, self.WHITE, [22, 100])
         self.__nome_jogo2 = Texto("RUN", "Materials/Mario-Kart-DS.ttf", 60, self.WHITE, [79, 85])
@@ -67,6 +67,7 @@ class EstadoInicial(Estado):
         self.__botao_recordes.draw()
 
         if play:
+            self.som_controller.playMusic(0)
             return "jogando"
         elif regras:
             return "regras"

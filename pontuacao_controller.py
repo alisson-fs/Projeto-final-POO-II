@@ -4,7 +4,7 @@ from fundo import Fundo
 from velocidade_controller import VelocidadeController
 from singleton import Singleton
 
-class Pontuacao(metaclass=Singleton):
+class PontuacaoController(metaclass=Singleton):
     def __init__(self):
         self.__pontos = 0
         self.__tela = Tela()
@@ -18,6 +18,35 @@ class Pontuacao(metaclass=Singleton):
         self.__velocidade_controller = VelocidadeController()
         self.__len_pontuacao = 1
         self.__fundo = Fundo([360, 10, 35, 30], self.__GREEN)
+
+        self.__multiplicador = 1
+        self.__multiplicador_ativo = False
+        self.__timer_multiplicador = 0
+        self.__timer_multiplicador_max = 300
+
+    @property
+    def multiplicador(self):
+        return self.__multiplicador
+
+    @multiplicador.setter
+    def multiplicador(self, multiplicador):
+        self.__multiplicador = multiplicador
+
+    @property
+    def multiplicador_ativo(self):
+        return self.__multiplicador_ativo
+
+    @multiplicador_ativo.setter
+    def multiplicador_ativo(self, multiplicador_ativo):
+        self.__multiplicador_ativo = multiplicador_ativo
+
+    @property
+    def timer_multiplicador(self):
+        return self.__timer_multiplicador
+
+    @timer_multiplicador.setter
+    def timer_multiplicador(self, timer_multiplicador):
+        self.__timer_multiplicador = timer_multiplicador
 
     @property
     def pontos(self):
@@ -44,11 +73,18 @@ class Pontuacao(metaclass=Singleton):
         self.__texto.draw()
 
     def update(self):
+        if self.__multiplicador_ativo:
+            self.__timer_multiplicador += 1
+            if self.__timer_multiplicador >= self.__timer_multiplicador_max:
+                self.__timer_multiplicador = 0
+                self.__multiplicador_ativo = False
+                self.__multiplicador = 1
+
         self.__timerAtual = self.__timerMax / self.__velocidade_controller.vel_atual
         self.__timer += 1
         if self.__timer > self.__timerAtual:
             self.__timer = 0
-            self.__pontos += 1
+            self.__pontos += 1 * self.__multiplicador
         self.ajuste_pontos()
 
     def ajuste_pontos(self):

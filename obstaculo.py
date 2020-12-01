@@ -16,3 +16,4 @@ class Obstaculo(Objeto):
         self.rect.y += self.velocidade_controller.vel_atual
         if (self.rect.top >= self.tela.height):
             self.kill()
+            del self
