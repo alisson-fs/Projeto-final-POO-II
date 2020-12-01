@@ -85,8 +85,10 @@ class EstadoDerrota(Estado):
             self.pontuacao.zerar()
             self.velocidade_controller.zerar()
             self.fases_controller.zerar()
-            self.jogador.reseta_vida()
+            self.jogador.reset()
             self.obstaculo_controller.zerar()
+            self.som_controller.stopMusic()
+            self.som_controller.playMusic(0)
             return "jogando"
         elif menu_derrota:
             self.__recorde_salvo = False
@@ -94,7 +96,9 @@ class EstadoDerrota(Estado):
             self.pontuacao.zerar()
             self.velocidade_controller.zerar()
             self.fases_controller.zerar()
+            self.jogador.reset()
             self.obstaculo_controller.zerar()
+            self.som_controller.stopMusic()
             return "inicial"
         else:
             return "derrota"

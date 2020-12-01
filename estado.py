@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from tela import Tela
-from pontuacao import Pontuacao
+from pontuacao_controller import PontuacaoController
 from som_controller import SomController
 from velocidade_controller import VelocidadeController
 from obstaculo_controller import ObstaculoController
@@ -14,7 +14,7 @@ class Estado(ABC):
     def __init__(self, jogador=None, obstaculo_controller=None):
         self.__jogador = jogador
         self.__tela = Tela()
-        self.__pontuacao = Pontuacao()
+        self.__pontuacao = PontuacaoController()
         self.__som_controller = SomController()
         self.__velocidade_controller = VelocidadeController()
         self.__obstaculo_controller = obstaculo_controller
@@ -29,6 +29,15 @@ class Estado(ABC):
         self.__YELLOW = (220, 220, 0)
         self.__SILVER = (160, 160, 160)
         self.__BRONZE = (150, 100, 0)
+        self.__musica = False
+
+    @property
+    def musica(self):
+        return self.__musica
+
+    @musica.setter
+    def musica(self, musica):
+        self.__musica = musica
 
     @property
     def jogador(self):

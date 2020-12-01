@@ -2,14 +2,14 @@ from estado import Estado
 from texto import Texto
 from fundo import Fundo
 from botao_imagem import BotaoImagem
-from events_regras import EventsRegras
+from events_padrao import EventsPadrao
 import pygame
 
 
 class EstadoRegras(Estado):
     def __init__(self):
         super().__init__()
-        self.__events_regras = EventsRegras()
+        self.__events_regras = EventsPadrao()
         self.__texto_regras = Texto("Regras", "Materials/Early GameBoy.ttf", 50, self.BLACK, [60, 40])
         self.__imagem_botao_voltar = pygame.image.load("Materials/voltar.png").convert_alpha(self.tela.display)
         self.__fundo_voltar = Fundo([20, 510, 70, 70], self.WHITE)

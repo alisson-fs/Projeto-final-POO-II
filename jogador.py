@@ -19,6 +19,27 @@ class Jogador(Objeto):
         self.__vida_atual = 3
         self.__morto = False
 
+        self.__invencivel = False
+        self.__timer_invencivel = 0
+        self.__timer_invencivel_max = 300
+
+
+    @property
+    def invencivel(self):
+        return self.__invencivel
+    
+    @invencivel.setter
+    def invencivel(self, invencivel):
+        self.__invencivel = invencivel
+
+    @property
+    def timer_invencivel(self):
+        return self.__timer_invencivel
+
+    @timer_invencivel.setter
+    def timer_invencivel(self, timer_invencivel):
+        self.__timer_invencivel = timer_invencivel
+
     @property
     def vida_atual(self):
         return self.__vida_atual
@@ -43,13 +64,29 @@ class Jogador(Objeto):
     def reseta_vida(self):
         self.__vida_atual = 3
 
+    def reseta_posicao(self):
+        self.rect.x = 145
+
+    def reset(self):
+        self.reseta_posicao()
+        self.reseta_vida()
+        self.__meio = True
+        self.__velX = 0
+
     def blitme(self):
         # Animação
         super().animacao()
         # Desenha na tela
         super().blitme()
 
+
     def update(self):
+
+        if self.invencivel:
+            self.__timer_invencivel +=1
+            if self.__timer_invencivel >= self.__timer_invencivel_max:
+                self.invencivel = False
+                self.__timer_invencivel = 0
 
         if self.__vida_atual <= 0:
             self.__morto = True

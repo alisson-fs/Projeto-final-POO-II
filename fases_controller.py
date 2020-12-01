@@ -1,13 +1,13 @@
 from fase import Fase
 from tela import Tela
 from bg_element import BGElement
-from pontuacao import Pontuacao
+from pontuacao_controller import PontuacaoController
 import pygame
 
 
 class FasesController:
     def __init__(self):
-        self.__pontuacao = Pontuacao()
+        self.__pontuacao = PontuacaoController()
         self.__tela = Tela()
         
         # Fase 1
