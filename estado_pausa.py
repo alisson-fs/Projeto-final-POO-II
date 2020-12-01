@@ -6,8 +6,8 @@ from botao import Botao
 
 
 class EstadoPausa(Estado):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, jogador, obstaculo_controller):
+        super().__init__(jogador, obstaculo_controller)
         self.__events_pausa = EventsPausa()
         
         self.__texto_pausado = Texto("Pausado", "Materials/Early GameBoy.ttf", 50, self.BLACK, [30, 70])
@@ -44,6 +44,8 @@ class EstadoPausa(Estado):
             self.pontuacao.zerar()
             self.velocidade_controller.zerar()
             self.fases_controller.zerar()
+            self.jogador.reseta_vida()
+            self.obstaculo_controller.zerar()
             return "inicial"
         elif som:
             return "derrota"

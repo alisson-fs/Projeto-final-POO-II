@@ -11,8 +11,8 @@ import pygame
 
 
 class EstadoJogando(Estado):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, jogador, obstaculo_controller):
+        super().__init__(jogador, obstaculo_controller)
         self.__musica = False
         self.__events_jogando = EventsJogando(self.jogador)
         self.__borda = pygame.image.load("Materials/borda.png").convert_alpha(self.tela.display)
@@ -30,7 +30,7 @@ class EstadoJogando(Estado):
         self.__events_jogando.check_events()
         self.fases_controller.update()
         self.fases_controller.fase_atual.update()
-        self.jogador.update()
+        morreu = self.jogador.update()
         self.pontuacao.update()
         self.obstaculo_controller.update()
         self.obstaculo_controller.timer()
@@ -55,5 +55,7 @@ class EstadoJogando(Estado):
 
         if self.__events_jogando.pausa or pausa_botao:
             return "pausa"
+        elif morreu:
+            return "derrota"
         else:
             return "jogando"

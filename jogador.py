@@ -1,7 +1,6 @@
 from objeto import Objeto
 import pygame
 from singleton import Singleton
-from tela import Tela
 
 
 class Jogador(Objeto):
@@ -18,6 +17,7 @@ class Jogador(Objeto):
         self.__paradas = [35, 145, 260]
         self.__meio = True
         self.__vida_atual = 3
+        self.__morto = False
 
     @property
     def vida_atual(self):
@@ -33,6 +33,16 @@ class Jogador(Objeto):
     def move_right(self):
         self.__velX = self.velocidade_controller.vel_atual
 
+    def perde_vida(self):
+        self.__vida_atual -= 1
+
+    def ganha_vida(self):
+        if self.__vida_atual < 3:
+            self.__vida_atual += 1
+
+    def reseta_vida(self):
+        self.__vida_atual = 3
+
     def blitme(self):
         # Animação
         super().animacao()
@@ -40,6 +50,12 @@ class Jogador(Objeto):
         super().blitme()
 
     def update(self):
+
+        if self.__vida_atual <= 0:
+            self.__morto = True
+        else:
+            self.__morto = False
+
         if self.__meio == False:
             if self.__velX > 0:
                 if self.rect.x < self.__paradas[1] and self.rect.x + self.__velX >= self.__paradas[1]:
@@ -57,3 +73,5 @@ class Jogador(Objeto):
                 self.__meio = False
         self.rect.x += self.__velX
         self.rect.x = max(min(self.rect.x, self.__paradas[2]), self.__paradas[0])
+
+        return self.__morto

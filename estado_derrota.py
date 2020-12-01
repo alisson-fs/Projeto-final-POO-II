@@ -10,8 +10,8 @@ from pygame_widgets import TextBox
 
 
 class EstadoDerrota(Estado):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, jogador, obstaculo_controller):
+        super().__init__(jogador, obstaculo_controller)
         self.__recordes_controller = RecordesController()
         self.__recorde_salvo = False
 
@@ -85,6 +85,8 @@ class EstadoDerrota(Estado):
             self.pontuacao.zerar()
             self.velocidade_controller.zerar()
             self.fases_controller.zerar()
+            self.jogador.reseta_vida()
+            self.obstaculo_controller.zerar()
             return "jogando"
         elif menu_derrota:
             self.__recorde_salvo = False
@@ -92,6 +94,7 @@ class EstadoDerrota(Estado):
             self.pontuacao.zerar()
             self.velocidade_controller.zerar()
             self.fases_controller.zerar()
+            self.obstaculo_controller.zerar()
             return "inicial"
         else:
             return "derrota"
