@@ -10,7 +10,7 @@ class EventsSom(Events):
 
     @property
     def mouseClick(self):
-        return self.__mouseClick"
+        return self.__mouseClick
 
     def check_events(self):
         self.__mouseClick = False
