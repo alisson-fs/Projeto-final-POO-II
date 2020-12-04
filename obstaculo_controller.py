@@ -7,7 +7,6 @@ import random
 class ObstaculoController(ObjetosController):
     def __init__(self, jogador):
         super().__init__(jogador)
-        self.__obstaculos_tela = 0
         self.__obstaculos_tela = ["Materials/virus.png", "Materials/EAD.png"]
         self.__posicoes_obstaculos = [[35, -250], [145, -250], [260, -250]]
         
