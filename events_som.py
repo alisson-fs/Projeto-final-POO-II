@@ -10,11 +10,7 @@ class EventsSom(Events):
 
     @property
     def mouseClick(self):
-        return self.__mouseClick
-
-    @property
-    def events(self):
-        return pygame.event.get()
+        return self.__mouseClick"
 
     def check_events(self):
         self.__mouseClick = False
