@@ -23,22 +23,6 @@ class Objeto(pygame.sprite.Sprite, ABC):
         # self.pos_inicial()
 
     @property
-    def tamanho(self):
-        return self.__tamanho
-
-    @tamanho.setter
-    def tamanho(self, tamanho):
-        self.__tamanho = tamanho
-
-    @property
-    def nome(self):
-        return self.__nome
-
-    @nome.setter
-    def nome(self, nome):
-        self.__nome = nome
-
-    @property
     def posicao(self):
         return self.__posicao
 
