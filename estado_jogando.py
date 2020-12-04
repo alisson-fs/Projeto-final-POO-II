@@ -1,18 +1,13 @@
 from estado import Estado
 from events_jogando import EventsJogando
-from tela import Tela
-from jogador import Jogador
 from fundo import Fundo
-#from pontuacao_controller import PontuacaoController
-from obstaculo_controller import ObstaculoController
-from fases_controller import FasesController
 from botao_imagem import BotaoImagem
 import pygame
 
 
 class EstadoJogando(Estado):
-    def __init__(self, jogador, obstaculo_controller):
-        super().__init__(jogador, obstaculo_controller)
+    def __init__(self, jogador, obstaculo_controller, efeito_controller):
+        super().__init__(jogador, obstaculo_controller, efeito_controller)
         self.__events_jogando = EventsJogando(self.jogador)
         self.__borda = pygame.image.load("Materials/borda.png").convert_alpha(self.tela.display)
         self.__vida = pygame.image.load("Materials/coracao.png").convert_alpha(self.tela.display)
@@ -31,7 +26,9 @@ class EstadoJogando(Estado):
         morreu = self.jogador.update()
         self.pontuacao.update()
         self.obstaculo_controller.update()
-        self.obstaculo_controller.timer()
+        self.efeito_controller.update()
+        self.obstaculo_controller.timer_update()
+        self.efeito_controller.timer_update()
         self.velocidade_controller.update()
 
         pausa_botao = self.__botao_pausa.update()
@@ -40,6 +37,7 @@ class EstadoJogando(Estado):
         self.fases_controller.fase_atual.blitme()
         self.jogador.blitme()
         self.obstaculo_controller.draw()
+        self.efeito_controller.draw()
         self.pontuacao.fundo.blitme()
         self.pontuacao.draw()
         self.__botao_pausa.draw()
@@ -60,10 +58,11 @@ class EstadoJogando(Estado):
         self.tela.display.blit(self.__borda, (0, 0))
 
         if self.__events_jogando.pausa or pausa_botao:
-            self.som_controller.pauseMusic()
+            self.som_controller.pause_music()
             return "pausa"
         elif morreu:
-            self.som_controller.stopMusic()
+            self.som_controller.stop_music()
+            self.som_controller.play_music(1)
             return "derrota"
         else:
             return "jogando"

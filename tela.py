@@ -1,6 +1,7 @@
 import pygame
 from singleton import Singleton
 
+
 class Tela(metaclass=Singleton):
     def __init__(self):
         self.__medidas = (400,600)

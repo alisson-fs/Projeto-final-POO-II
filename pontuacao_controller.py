@@ -4,6 +4,7 @@ from fundo import Fundo
 from velocidade_controller import VelocidadeController
 from singleton import Singleton
 
+
 class PontuacaoController(metaclass=Singleton):
     def __init__(self):
         self.__pontos = 0

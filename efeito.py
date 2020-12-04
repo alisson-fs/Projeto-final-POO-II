@@ -18,8 +18,9 @@ class Efeito(Objeto, ABC):
         self.rect.y += self.velocidade_controller.vel_atual
         if (self.rect.top >= self.tela.height):
             self.kill()
-        self.faz_efeito()
+        self.efeito()
 
+    @abstractmethod
     def efeito(self):
         self.__pontuacao_controller.pontos += 100
 

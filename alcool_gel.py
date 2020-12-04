@@ -20,6 +20,7 @@ class AlcoolGel(Efeito):
             self.kill()
 
     def efeito(self):
+        super().efeito()
         if not self.__pontuacao_controller.multiplicador_ativo:
             self.__pontuacao_controller.multiplicador_ativo = True
             self.__pontuacao_controller.multiplicador = 2

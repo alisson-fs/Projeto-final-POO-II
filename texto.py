@@ -1,6 +1,7 @@
 import pygame
 from tela import Tela
 
+
 class Texto:
     def __init__(self,
                  texto,

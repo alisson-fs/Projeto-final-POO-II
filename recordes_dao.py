@@ -2,8 +2,7 @@ import pickle
 
 
 class RecordeDAO:
-    def __init__(self,
-                 datasource="recordes.pkl"):
+    def __init__(self, datasource="recordes.pkl"):
         self.__datasource = datasource
         self.__object_cache = []
         try:

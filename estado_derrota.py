@@ -4,15 +4,13 @@ from texto import Texto
 from fundo import Fundo
 from botao import Botao
 from botao_imagem import BotaoImagem
-from recordes_controller import RecordesController
 import pygame
 from pygame_widgets import TextBox
 
 
 class EstadoDerrota(Estado):
-    def __init__(self, jogador, obstaculo_controller):
-        super().__init__(jogador, obstaculo_controller)
-        self.__recordes_controller = RecordesController()
+    def __init__(self, jogador, obstaculo_controller, efeito_controller):
+        super().__init__(jogador, obstaculo_controller, efeito_controller)
         self.__recorde_salvo = False
 
         self.__texto_derrota = Texto("Derrota", "Materials/Early GameBoy.ttf", 50, self.BLACK, [30, 40])
@@ -43,7 +41,7 @@ class EstadoDerrota(Estado):
             if len(self.__nome.getText()) > 10:
                 self.__texto_recorde.texto = "Digite um nome menor, limite 10 caracteres."
             elif not self.__recorde_salvo:
-                msg, salvo = self.__recordes_controller.inclui_recorde(self.__nome.getText(), self.pontuacao.pontos)
+                msg, salvo = self.recordes_controller.inclui_recorde(self.__nome.getText(), self.pontuacao.pontos)
                 self.__texto_recorde.texto = msg
                 self.__recorde_salvo = salvo
             else:
@@ -87,8 +85,9 @@ class EstadoDerrota(Estado):
             self.fases_controller.zerar()
             self.jogador.reset()
             self.obstaculo_controller.zerar()
-            self.som_controller.stopMusic()
-            self.som_controller.playMusic(0)
+            self.efeito_controller.zerar()
+            self.som_controller.stop_music()
+            self.som_controller.play_music(0)
             return "jogando"
         elif menu_derrota:
             self.__recorde_salvo = False
@@ -98,7 +97,7 @@ class EstadoDerrota(Estado):
             self.fases_controller.zerar()
             self.jogador.reset()
             self.obstaculo_controller.zerar()
-            self.som_controller.stopMusic()
+            self.efeito_controller.zerar()
             return "inicial"
         else:
             return "derrota"

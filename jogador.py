@@ -1,6 +1,6 @@
 from objeto import Objeto
-import pygame
 from singleton import Singleton
+import pygame
 
 
 class Jogador(Objeto):

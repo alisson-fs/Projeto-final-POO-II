@@ -58,14 +58,6 @@ class Objeto(pygame.sprite.Sprite, ABC):
     def img_atual(self, img):
         self.__img_atual = img
 
-    # @property
-    # def rect(self):
-    #     return self.__rect
-
-    # @rect.setter
-    # def rect(self, rect):
-    #     self.__rect = rect
-
     @property
     def anim(self):
         return self.__anim
