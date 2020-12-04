@@ -1,7 +1,7 @@
 import sys
 import pygame
 from events_padrao import EventsPadrao
-import sys
+
 
 class EventsDerrota(EventsPadrao):
     def __init__(self, textbox):

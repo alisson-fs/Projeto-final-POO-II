@@ -1,5 +1,6 @@
 from singleton import Singleton
 
+
 class VelocidadeController(metaclass=Singleton):
     def __init__(self):
         self.__vel_inicial = 10

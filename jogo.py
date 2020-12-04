@@ -2,6 +2,7 @@ import pygame
 from tela import Tela
 from jogador import Jogador
 from obstaculo_controller import ObstaculoController
+from efeito_controller import EfeitoController
 from estado_inicial import EstadoInicial
 from estado_jogando import EstadoJogando
 from estado_pausa import EstadoPausa
@@ -28,10 +29,11 @@ class Jogo:
                                  pygame.image.load("Materials/p1.png").convert_alpha(self.__tela.display),
                                  pygame.image.load("Materials/p3.png").convert_alpha(self.__tela.display)])
         self.__obstaculo_controller = ObstaculoController(self.__jogador)
+        self.__efeito_controller = EfeitoController(self.__jogador)
         self.__estados = {"inicial": EstadoInicial(self.__jogador),
-                          "jogando": EstadoJogando(self.__jogador, self.__obstaculo_controller),
-                          "pausa": EstadoPausa(self.__jogador, self.__obstaculo_controller),
-                          "derrota": EstadoDerrota(self.__jogador, self.__obstaculo_controller),
+                          "jogando": EstadoJogando(self.__jogador, self.__obstaculo_controller, self.__efeito_controller),
+                          "pausa": EstadoPausa(self.__jogador, self.__obstaculo_controller, self.__efeito_controller),
+                          "derrota": EstadoDerrota(self.__jogador, self.__obstaculo_controller, self.__efeito_controller),
                           "recorde": EstadoRecorde(),
                           "regras": EstadoRegras(),
                           "som": EstadoSom(),

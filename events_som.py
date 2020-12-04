@@ -1,7 +1,7 @@
 import sys
 import pygame
 from events import Events
-import sys
+
 
 class EventsSom(Events):
     def __init__(self, sliders):

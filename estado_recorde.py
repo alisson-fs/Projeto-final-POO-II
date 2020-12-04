@@ -1,5 +1,4 @@
 from estado import Estado
-from recordes_controller import RecordesController
 from botao import Botao
 from texto import Texto
 from fundo import Fundo

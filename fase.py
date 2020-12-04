@@ -1,6 +1,7 @@
 import pygame
 from tela import Tela
 
+
 class Fase:
 
     def __init__(self,

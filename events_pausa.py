@@ -2,6 +2,7 @@ import pygame
 from events import Events
 import sys
 
+
 class EventsPausa(Events):
     def __init__(self):
         self.__pausa = False

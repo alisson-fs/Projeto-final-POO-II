@@ -3,7 +3,6 @@ from tela import Tela
 from pontuacao_controller import PontuacaoController
 from som_controller import SomController
 from velocidade_controller import VelocidadeController
-from obstaculo_controller import ObstaculoController
 from fases_controller import FasesController
 from recordes_controller import RecordesController
 from jogador import Jogador
@@ -11,13 +10,14 @@ import pygame
 
 
 class Estado(ABC):
-    def __init__(self, jogador=None, obstaculo_controller=None):
+    def __init__(self, jogador=None, obstaculo_controller=None, efeito_controller=None):
         self.__jogador = jogador
         self.__tela = Tela()
         self.__pontuacao = PontuacaoController()
         self.__som_controller = SomController()
         self.__velocidade_controller = VelocidadeController()
         self.__obstaculo_controller = obstaculo_controller
+        self.__efeito_controller = efeito_controller
         self.__fases_controller = FasesController()
         self.__recordes_controller = RecordesController()
         self.__GREEN = (0, 100, 0)
@@ -62,6 +62,10 @@ class Estado(ABC):
     @property
     def obstaculo_controller(self):
         return self.__obstaculo_controller
+
+    @property
+    def efeito_controller(self):
+        return self.__efeito_controller
 
     @property
     def fases_controller(self):

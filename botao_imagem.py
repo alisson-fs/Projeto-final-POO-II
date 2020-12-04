@@ -1,4 +1,3 @@
-from texto import Texto
 from fundo import Fundo
 from botao import Botao
 from tela import Tela

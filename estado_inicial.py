@@ -41,6 +41,9 @@ class EstadoInicial(Estado):
 
     def start(self):
         #Updates
+        if not self.musica:
+            self.som_controller.play_music(1)
+            self.musica = True
         self.__events_inicial.check_events()
         play = self.__botao_play.update()
         regras = self.__botao_regras.update()
@@ -67,7 +70,8 @@ class EstadoInicial(Estado):
         self.__botao_recordes.draw()
 
         if play:
-            self.som_controller.playMusic(0)
+            self.som_controller.stop_music()
+            self.som_controller.play_music(0)
             return "jogando"
         elif regras:
             return "regras"

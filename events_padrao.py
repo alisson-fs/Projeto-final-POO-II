@@ -2,6 +2,7 @@ import sys
 import pygame
 from events import Events
 
+
 class EventsPadrao(Events):
     def __init__(self):
         self.__mouseClick = False
