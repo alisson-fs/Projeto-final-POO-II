@@ -58,14 +58,6 @@ class PontuacaoController(metaclass=Singleton):
         self.__pontos = pontos
 
     @property
-    def velocidade(self):
-        return self.__velocidade
-
-    @velocidade.setter
-    def velocidade(self, velocidade):
-        self.__velocidade = velocidade
-
-    @property
     def fundo(self):
         return self.__fundo
 
