@@ -1,4 +1,4 @@
-from recordes_dao import RecordeDAO
+from recorde_dao import RecordeDAO
 from singleton import Singleton
 
 
