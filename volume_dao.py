@@ -7,7 +7,7 @@ class VolumeDAO:
         self.__object_cache = {}
         try:
             self.__load()
-        except Exception:
+        except FileNotFoundError:
             self.__dump()
 
     def __dump(self):
